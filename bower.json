@@ -1,0 +1,26 @@
+{
+  "name": "appChat",
+  "version": "1.0.0",
+  "authors": "Domenico Colandrea",
+  "description": "Chat application using node.js, express.js, socket.io, and AngularJS",
+  "main": "app.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.14",
+    "angular-route": "latest",
+    "angular-sanitize": "latest",
+    "foundation": "latest",
+    "font-awesome": "latest",
+    "angular-spinkit": "v0.0.2.1",
+    "jquery": "latest",
+    "angular-bootstrap": "~0.10.0",
+    "angular-moment": "~0.7.0"
+  }
+}

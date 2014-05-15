@@ -1,0 +1,266 @@
+ul ,
+li {
+	list-style: none !important;
+}
+// main.scss file
+
+html, body {
+	overflow-x: hidden;
+	@include font(300, normal, 1);
+}
+
+* {
+	box-sizing: border-box;
+	outline:none;
+}
+
+// typicons family
+@import url(http://weloveiconfonts.com/api/?family=typicons);
+[class*="typicons-"]:before {
+  font-family: 'Typicons', sans-serif;
+}
+
+.top-bar  {
+	width: 100%;
+	background: $top-nav-bar !important;
+	border-bottom: 4px solid $sky-blue;
+	height: 70px !important;
+	padding: 0 20px;
+	margin-bottom: 0 !important;
+}
+
+.top-bar-section ul {
+	background: none !important;
+}
+
+.logo {
+	color: white;
+	@include font(100, normal, 1);
+	font-size: 35px;
+	padding: 8px 0 0 0;
+}
+
+.left-side-bar {
+	background: $side-bar-module;
+	height: auto;
+	min-height: 658px;
+	// max-width: 200px;
+	padding: 20px;
+	border-right: 1px solid $side-bar-module-border;
+	border-bottom: 1px solid $side-bar-module-border;
+}
+
+.full-width-primary-section {
+	height: 70px;
+	border-bottom: 1px solid $side-bar-module-border;
+	padding: 20px;
+}
+
+.message-section {
+	padding: 10px 0;
+	height: 529px;
+}
+
+.right-side-bar {
+	background: $side-bar-module;
+	height: auto;
+	min-height: 529px;
+	padding: 20px;
+	// max-width: 200px;
+	border-left: 1px solid $side-bar-module-border;	
+}
+
+.full-width-chat-section {
+	height: 59px;
+	border-top: 1px solid $side-bar-module-border;
+	border-bottom: 1px solid $side-bar-module-border;
+	padding: 10px;
+}
+
+.nav-el-left {
+	position: relative;
+	top: 14px;
+	left: 30px;
+
+		a {
+			color: $side-bar-module-border;
+
+			li {
+				font-size: 30px;
+				padding: 0 12px;
+			}
+		}
+}
+
+.nav-el-right {
+	position: relative;
+	top: 13px;
+	right: 40px;
+}
+
+.login-form-container {
+	margin-top: 100px;
+}
+
+.form-group {
+	margin-right: 4px;
+	label,
+	input {
+		@include font(300, normal, 1);
+	}
+}
+
+.enter-chat-button {
+	background: $sky-blue !important;
+	font-size: 20px;
+	@include font(300, normal, 1);	
+}
+
+.chat-button {
+	margin-left: 17px;
+	width: 240px;
+	height: 37px;
+	padding-top: 9px !important;
+	background: $sky-blue !important;
+	@include font(300, normal, 1);
+}
+
+.create-room-text {
+	margin-left: 5px;
+}
+
+.headline-text {
+	font-size: 1.5rem;
+	line-height: 1.3;
+	margin-bottom: 0 !important;
+	@include font(400, normal, 1);
+	color: $top-nav-bar;
+}
+
+.enter-chat-nickname-label {
+	color: lighten($top-nav-bar, 10%);
+	@include font(300, normal, 1);
+	font-size: 1.6em !important;
+	padding-bottom: 3px;
+
+}
+
+.login-margin-push {
+	margin-bottom: 400px;
+}
+
+.copyright {
+	@include font(300, normal, 1);
+	font-size: 15px;
+	color: $side-bar-module-border;
+	position: relative;
+	padding-top: 20px; 
+}
+
+.room-info-meta {
+	color: $side-bar-module;
+	padding-left: 20px;
+	@include font(300, normal, 1);
+}
+
+.red-button {
+	background: $offline-red !important;
+}
+
+.green-button {
+	background: $online-green !important;
+}
+
+.leave-yellow {
+	background: $leave-yellow !important;
+}
+
+.side-bar-button {
+	padding: 8px 30px;
+	@include font(300, normal, 1);
+}
+
+.is-typing-message {
+	position: absolute;
+	bottom: 0;
+	right: 20px;
+}
+
+.video-button {
+	margin-top: 0 !important;
+	margin-left: 0 !important;
+	color: white !important;
+	background: $sky-blue !important;
+	@include font(300, normal, 1);
+}
+
+.room-button {
+	margin-top: 0 !important;
+	margin-left: 0 !important;
+	width: 100%;
+	color: white !important;
+	background: $sky-blue !important;
+	@include font(300, normal, 1);
+}
+
+
+.videoContainer {
+    position: relative;
+    width: 100%;
+	height: 333px;
+	margin-top: 10px;
+}
+.videoContainer video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.volume_bar {
+    position: absolute;
+    width: 5px;
+    height: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #12acef;
+}
+.remotes {
+	margin-top: 10px;
+}
+
+.chatroom-message-board {
+	margin-left: 0 !important;
+
+	li {
+		padding: 8px 20px;
+	}
+
+	li:nth-child(odd) {
+		background: $side-bar-module;
+	}
+}
+
+.chat-time {
+	padding-bottom: 10px;
+}
+
+.whos-online-list {
+	margin-left: 0px;
+}
+
+.people-online-list {
+	margin-left: 0px;
+	margin-top: 20px;
+}
+
+.room-list {
+	margin-left: 0px;
+}
+
+.dropdown-menu {
+	margin-left: 0px;
+}
+
+[scroll-glue]{
+height: 490px;
+overflow-y: scroll;
+}

@@ -1,0 +1,142 @@
+
+<!-- start fullwidth nav bar -->
+<div class="row collapse">
+    <div class="columns large-12">
+        <nav class="top-bar">
+            <ul class="title-area">
+                <h1 class="logo">APP CHAT</h1>
+            </ul>
+            <div class="nav-el-left">
+                <a ng-show="joined" href="/video-chat" class="left button video-button">VIDEO CHAT</a>
+                <small class="room-info-meta left" ng-if="user.owns">You can remove your room by clicking delete in drop-down menu in the top right corner.</small>
+                <small class="room-info-meta left" ng-cloak ng-if="!user.owns && user.inroom">You can create your own room as well (but you need to leave the current one first).</small>
+            </div>
+            <section class="top-bar-section">
+                <div class="nav-el-right">
+                    <ul class="right">
+                        <li ng-cloak><div ng-show='status === "online"' class="circle show-online online"></div><div ng-hide='status === "online"' class="circle show-online offline"></div></li>
+                        <li class="user-avatar square"></li>
+                        <li class="triangle arrow-down"></li>
+                    </ul>
+                </div>
+            </section>
+        </nav>
+    </div>
+</div>
+
+
+<!-- Begin page content -->
+<div class="row collapsee">
+    <div class="columns large-3 large-5 large-centered">
+        <div class="container login-margin-push login-form-container" ng-show="!joined">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <label class="sr-only enter-chat-nickname-label" for="username">What's your nickname? </label>
+              <input type="text" class="form-control" name="username" id="username" ng-model="username" placeholder="Lady of Dragons">
+            </div>
+            <button type="submit" class="enter-chat-button button expand" ng-click='joinServer()'>Enter chat</button>
+          </form>
+          <small ng-cloak ng-if="error" class="text-danger">{{ error.join }}</small> <small ng-cloak ng-if="suggestedUsername" class="text-info" ng-click="setUsername(suggestedUsername)">How about <span class="text-success" style="cursor: pointer;">{{ suggestedUsername }}</a>?</small>
+        </div>
+    </div>
+</div>
+<!-- start main content section -->
+<div ng-hide="!joined" class="container" ng-cloak>
+    <div class="row collapse">
+        <div class="columns large-2">
+            <aside class="left-side-bar">
+                <h4>Whos Online</h4>
+                <ul class="whos-online-list">
+                    <li ng-show="joined" ng-cloak>
+                        <a href="#">{{ peopleCount }} online</a>
+                        <ul class="people-online-list">
+                            <li ng-repeat="user in users" ng-cloak><p class="white">{{ user.name }} <span ng-if="user.countrycode"><img class="flag flag-{{user.countrycode}}"></span> <i class="fa fa-{{user.device}}"></i></p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <div class="columns large-10">
+            <!-- nested full-width column -->
+            <section class="full-width-primary-section">
+                <p class="headline-text left" ng-cloak>Hello {{ user.name }}. <span ng-cloak ng-if="user.owns">You own a room: <strong>{{ user.roomname }}</strong>.</span> <span ng-cloak ng-if="!user.owns && user.inroom">You have joined a room: <strong>{{ user.roomname }}</strong>.</span></p>
+                <p class="create-room-text headline-text left" ng-show="!user.inroom">Create a chat room or join one.</p>
+            </section>
+            <div class="row collapse">
+                <div class="columns large-9">
+                    <div id="message-section" class="message-section">
+                        <div ng-hide="!joined" class="container" ng-cloak>
+                            <div id="chatpanel" ng-show="user.inroom" ng-cloak>
+                                <div class="chat-time text-center">{{today | amDateFormat:'dddd, MMMM Do YYYY'}}</div>
+                                <ul scroll-glue class="chatroom-message-board">
+                                    <li class="list-unstyled" ng-repeat="message in messages track by $index" ng-cloak autoscroll ng-class="{dark: $index % 2 === 0}"><strong>{{ message.name }}</strong>: {{ message.message }}</li>
+                                </ul>
+                                <div class="is-typing-message">
+                                    <ul ng-if="isTyping">
+                                        <li ng-cloak ng-repeat="person in typingPeople track by $index" class="text-muted list-unstyled"><small>{{ person }} is typing</small></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns large-3">
+                    <aside class="right-side-bar">
+                        <h4>Rooms</h4>
+                        <ul class="room-list">
+                            <li class="dropdown" ng-show="joined" ng-cloak>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="room in rooms" ng-cloak>
+                                        <form class="form-inline" role="form">
+                                            <div class="form-group">
+                                                <p class="white">{{ room.name }}</p>
+                                            </div>
+                                            <button class="button side-bar-button green-button" type="submit" ng-click='joinRoom(room)' ng-hide='room.id === user.owns || room.id === user.inroom || user.owns || user.inroom'>Join</button>
+                                            <button type="submit" ng-click='deleteRoom(room)' class="button side-bar-button red-button" ng-show='room.id === user.owns'>Delete</button>
+                                            <button type="submit" ng-click="leaveRoom(room)" class="button side-bar-button leave-yellow" ng-hide='room.id === user.owns || !user.inroom || user.owns || user.inroom !== room.id'>Leave</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="form-inline" role="form" ng-hide="user.owns && user.inroom">
+                            <div class="row collapse">
+                                <div class="columns large-12">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter room name" class="form-control" ng-model="roomname" name="roomname" id="roomname">
+                                        <small ng-cloak ng-if="error" class="text-danger">{{ error.create }}</small>
+                                        <button type="submit" class="room-button button" ng-click="createRoom()">Create room</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </aside>
+                </div>
+            </div>
+            <section class="full-width-chat-section">
+                <div ng-hide="!joined" class="container" ng-cloak>
+                    <div id="chatpanel" ng-show="user.inroom" ng-cloak>
+                        <div class="row collapse">
+                            <div class="columns large-9">
+                                <form class="form-inline" role="form" ng-show="user.owns || user.inroom">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter message" class="form-control" ng-model="message" name="message" id="message" ng-keypress="typing($event, user.inroom)" on-focus="focus(true)" on-blur="focus(false)">
+                                        <small ng-cloak ng-if="error" class="text-danger">{{ error.send }}</small>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="columns large-3">
+                                <div ng-hide="!joined" class="container" ng-cloak>
+                                    <div id="chatpanel" ng-show="user.inroom" ng-cloak>
+                                        <button type="submit" class="button chat-button" ng-click='send()'>Send message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

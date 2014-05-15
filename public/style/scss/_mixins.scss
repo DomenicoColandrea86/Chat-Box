@@ -1,0 +1,66 @@
+
+// mixins.scss file
+
+// Typekit Font Mixin
+// Must include fallbacks for EACH typekit font — set them each as variables
+$lucida-grande: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+$georgia: Georgia, Cambria, "Times New Roman", Times, serif;
+$helvetica: helvetica, Tahoma, Verdana, Arial, sans-serif;
+
+// your typekit fonts
+$typekit-fonts:     "proxima-nova", "museo-slab", "ff-tisa-sans-web-pro"; // index [1,2,3]
+$typekit-fallbacks:  $lucida-grande, $georgia, $helvetica;
+
+@mixin font($weight: 400, $style: normal, $font: 1) {
+  $font-weight: $weight;
+  $font-style:  $style;
+
+  // Translate Weight
+  @if ($weight == 100) or ($weight == thin) or ($weight == ultralight) {
+    $weight: 1;
+  }
+  @if ($weight == 200) or ($weight == extralight) {
+    $weight: 2;
+  }
+  @if ($weight == 300) or ($weight == light) {
+    $weight: 3;
+  }
+  @if ($weight == 400) or ($weight == normal) or ($weight == book) {
+    $weight: 4;
+  }
+  @if ($weight == 500) or ($weight == medium) {
+    $weight: 5;
+  }
+  @if ($weight == 600) or ($weight == semibold) or ($weight == demi) {
+    $weight: 6;
+  }
+  @if ($weight == 700) or ($weight == bold) {
+    $weight: 7;
+  }
+  @if ($weight == 800) or ($weight == extrabold) {
+    $weight: 8;
+  }
+  @if ($weight == 900) or ($weight == black) or ($weight == heavy) {
+    $weight: 9;
+  }
+
+  // Translate Style
+  @if $style == normal {
+    $style: n;
+  }
+  @else if $style == italic {
+    $style: i;
+  }
+
+  // Assemble $font-family
+  $primary-font:   nth($typekit-fonts, $font) + "-" + $style + $weight;
+  $secondary-font: nth($typekit-fonts, $font);
+  $third-font:     nth($typekit-fonts, $font);
+  $fallback-fonts: nth($typekit-fallbacks, $font);
+  $font-family:    quote($primary-font), quote($secondary-font), quote($third-font), $fallback-fonts;
+
+  font-family: $font-family;
+  font-style:  $font-style;
+  font-weight: $font-weight;
+}
+

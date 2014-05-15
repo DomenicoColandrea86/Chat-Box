@@ -1,0 +1,47 @@
+
+// common.scss
+
+.square {
+	width: 40px;
+	height: 40px;
+}
+
+.circle {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+}
+
+.triangle {
+	width: 0; 
+	height: 0; 
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid $side-bar-module-border;
+}
+
+.online {
+	background: $online-green;
+}
+
+.offline {
+	background: $offline-red;
+}
+
+.user-avatar {
+	background: url(../../img/user/avatar/default-avatar.png) no-repeat;
+	background-size: 100%;
+	border-radius: 5px;
+}
+
+.show-online {
+	right: 30px;
+	top: 16px;
+	position: relative;
+}
+
+.arrow-down {
+	top: 17px;
+	position: relative;
+	left: 15px;
+}

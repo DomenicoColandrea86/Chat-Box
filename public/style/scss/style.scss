@@ -1,0 +1,15 @@
+
+// ----------------------------------- compass because its awesome!!
+@import "compass/css3";
+
+// ----------------------------------- browsers that support svg will use svg for gradients otherwise will just use standard gradients
+$experimental-support-for-svg: true;
+
+// ----------------------------------- Individual stylesheets
+
+@import "normalize";
+@import "foundation";
+@import "variables";
+@import "common";
+@import "mixins";
+@import "main";
