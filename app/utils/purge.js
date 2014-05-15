@@ -1,37 +1,7 @@
 
 var utils = require('./utils');
 module.exports.purge = function purge(s, action) {
-  /*
-  The action will determine how we deal with the room/user removal.
-  These are the following scenarios:
-  if the user is the owner and (s)he:
-    1) disconnects (i.e. leaves the whole server)
-      - advise users
-      - delete user from people object
-      - delete room from rooms object
-      - delete chat history
-      - remove all users from room that is owned by disconnecting user
-    2) removes the room
-      - same as above except except not removing user from the people object
-    3) leaves the room
-      - same as above
-  if the user is not an owner and (s)he's in a room:
-    1) disconnects
-      - delete user from people object
-      - remove user from room.people object
-    2) removes the room
-      - produce error message (only owners can remove rooms)
-    3) leaves the room
-      - same as point 1 except not removing user from the people object
-  if the user is not an owner and not in a room:
-    1) disconnects
-      - same as above except not removing user from room.people object
-    2) removes the room
-      - produce error message (only owners can remove rooms)
-    3) leaves the room
-      - n/a
-    otherwise notify users that they can't leave rooms they are not part of
-    */
+  
   if (people[s.id].inroom) { //user is in a room
     var room = rooms[people[s.id].inroom]; //get room from rooms object
     if (s.id === room.owner) { //given user is the owner of the room
