@@ -1,4 +1,4 @@
-# AppChat Demo - a realtime chatroom application using node.js, express.js, socket.io and AngularJS
+# Chat-Box - a realtime chatroom application using node.js, express.js, socket.io and AngularJS
 
 ## Libraries used
 ### Backend
